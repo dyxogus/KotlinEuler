@@ -1,11 +1,17 @@
+fun sumOfMultiplesUnderComplicated(multiple: Int, upperRange: Int): Int {
+    return generateSequence(multiple) { if (it + multiple < upperRange) it + multiple else null }.sum()
+}
+
+fun sumOfMultiplesUnder(multiple: Int, upperRange: Int): Int {
+    return (multiple..upperRange step multiple).sum()
+}
+
 fun q1(upperRange: Int = 1000): Int {
-//    val multiples3 = for (integer in 3..1000)
-    val multiplesOf3 = generateSequence(3) { if (it + 3 < upperRange) it + 3 else null }
-    val multiplesOf5 = generateSequence(5) { if (it + 5 < upperRange) it + 5 else null }
+    val sumOfMultipleOf3 = sumOfMultiplesUnder(3, upperRange)
+    val sumOfMultipleOf5 = sumOfMultiplesUnder(5, upperRange)
+    val sumOfMultipleOf15 = sumOfMultiplesUnder(15, upperRange)
 
-    val multiplesOf15 = generateSequence(15) { if (it + 15 < upperRange) it + 15 else null }
-
-    return multiplesOf3.sum() + multiplesOf5.sum() - multiplesOf15.sum()
+    return sumOfMultipleOf3 + sumOfMultipleOf5 - sumOfMultipleOf15
 }
 
 fun main() {
