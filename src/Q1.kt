@@ -16,5 +16,5 @@ fun q1(upperRange: Int = 1000): Int {
 
 fun main() {
     assert(q1(10) == 23)
-    println(q1())
+    assert(q1() == 233168)
 }
