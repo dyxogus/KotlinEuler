@@ -1,4 +1,31 @@
+import kotlin.math.sqrt
+
 typealias PrimeNumber = Long
+
+fun nthPrime(n: Int): Int {
+    fun isPrimeHelper(n: Int, primesSoFar: MutableList<Int>): Boolean {
+        val nSquared = sqrt(n.toDouble()).toInt()
+
+        for (primeNumber in primesSoFar) {
+            if (primeNumber > nSquared) break
+            if (n % primeNumber == 0) return false
+        }
+
+        return true
+    }
+
+
+    val primes = mutableListOf(2, 3)
+    var i = 6
+
+    while (true) {
+        if (isPrimeHelper(i - 1, primes)) primes.add(i - 1)
+        if (isPrimeHelper(i + 1, primes)) primes.add(i + 1)
+
+        i += 6
+        if (primes.size >= n) return primes[n - 1]
+    }
+}
 
 fun decomposeToPrimePowers(number: Int, primeNumbers: List<Int>): Map<Int, Int> {
     var mutableNumber = number
