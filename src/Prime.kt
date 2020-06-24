@@ -1,19 +1,35 @@
 typealias PrimeNumber = Long
-typealias PrimeFactor = Int
 
-fun decomposeToPrimeFactors(number: Long): Map<PrimeNumber, PrimeFactor> {
-    var numberDecomposed = number
-    val primeFactors = mutableMapOf<PrimeNumber, PrimeFactor>()
+fun decomposeToPrimePowers(number: Int, primeNumbers: List<Int>): Map<Int, Int> {
+    var mutableNumber = number
+    val primePowers = HashMap<Int, Int>()
 
-    for (primeNumber in (2L..4L) + (6L..number step 1L)) {
-        while (numberDecomposed % primeNumber == 0L) {
-            numberDecomposed /= primeNumber
-            primeFactors[primeNumber] = primeFactors[primeNumber] ?: 1
+    for (primeNumber in primeNumbers) {
+        while (mutableNumber % primeNumber == 0) {
+            primePowers[primeNumber] = primePowers.getOrDefault(primeNumber, 0) + 1
+            mutableNumber /= primeNumber
         }
 
-        if (numberDecomposed == 1L)
-            return primeFactors
+        if (mutableNumber == 1) return primePowers
     }
 
-    return primeFactors
+    throw Exception("Not enough prime numbers provided")
+}
+
+fun generatePrimeNumbers(upperRange: Int): ArrayList<Int> {
+    assert(upperRange > 2)
+
+    val isPrimeList = BooleanArray(3) { false } + BooleanArray(upperRange - 2) { it % 2 == 0 }
+    val primeNumbers = arrayListOf(2)
+
+    for ((primeNumber, isPrime) in isPrimeList.withIndex()) {
+        if (isPrime) {
+            primeNumbers.add(primeNumber)
+
+            for (index in (2..upperRange / primeNumber))
+                isPrimeList[index * primeNumber] = false
+        }
+    }
+
+    return primeNumbers
 }
