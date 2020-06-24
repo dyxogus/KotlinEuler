@@ -1,8 +1,5 @@
-import java.util.logging.Level
-import java.util.logging.Logger
-import java.util.logging.SimpleFormatter
-import java.util.logging.StreamHandler
 import kotlin.math.pow
+import kotlin.test.assertEquals
 
 val MILLION = 10.toDouble().pow(6).toInt()
 
@@ -34,10 +31,11 @@ fun q2(limit: Int = 4 * MILLION): Int {
 }
 
 fun main() {
-    assert(q2(2) == 0)
-    assert(q2(2 + 1) == 2)
-    assert(q2(34 + 1) == 44)
-    assert(q2() == 4613732)
+    assertEquals(q2(2), 0)
+    assertEquals(q2(2 + 1), 2)
+    assertEquals(q2(34 + 1), 44)
+
+    verifyAnswer(::q2, 4 * MILLION, 4613732)
 //    Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.FINEST
 //    Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).addHandler(StreamHandler(System.out, SimpleFormatter()))
 }
