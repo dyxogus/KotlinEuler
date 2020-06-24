@@ -12,7 +12,7 @@ class LastPrimeNumberFound(val primeNumber: PrimeNumber) : Throwable()
  *
  * Answer: Write a fast decompose to primes function
  **  Optimisation 1: 2, 3 + step by 6 (6k-1, 6k, 6k+1, 6k+2, 6k+3, 6k+4) :: check only 6k-1, 6k+1
- **  Optimisation 2: Only need to check up until square root of N
+ **  Optimisation 2: Only need to check up until square root of N - but own't make a difference here
  */
 fun q3(upperRange: Long): Int {
     var mutableNumber = upperRange
